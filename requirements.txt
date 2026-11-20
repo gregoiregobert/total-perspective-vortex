@@ -1,0 +1,9 @@
+numpy
+scipy
+pandas
+matplotlib
+mne
+scikit-learn
+PyWavelets
+darkdetect
+moabb>=1.2.0
