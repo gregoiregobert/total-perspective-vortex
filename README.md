@@ -1,4 +1,4 @@
-# Total Perspective Vortex — Plug your brain to the shell
+# Total Perspective Vortex — Plug your brain to the shell.
 
 ## Présentation
 
