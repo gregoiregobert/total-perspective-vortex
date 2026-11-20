@@ -14,7 +14,8 @@ signals = [
     for i in range(4)
 ]
 
-fig, axes = plt.subplots(4, 1, figsize=(10, 5), sharex=True)
+# Format carré
+fig, axes = plt.subplots(4, 1, figsize=(5, 5), sharex=True)
 fig.patch.set_facecolor("#080d18")
 
 lines = []
@@ -24,13 +25,16 @@ for ax, signal, channel in zip(axes, signals, channels):
     line, = ax.plot([], [], color="#00d9ff", lw=1)
     lines.append(line)
     ax.set_ylim(-1.5, 1.5)
-    ax.set_ylabel(channel, color="#00d9ff", rotation=0, labelpad=25)
+    ax.set_ylabel(channel, color="#00d9ff", rotation=0, labelpad=20)
     ax.grid(alpha=0.2)
-    ax.tick_params(colors="white")
+    ax.tick_params(colors="white", labelsize=7)
 
 axes[-1].set_xlim(0, window)
-fig.suptitle("LIVE EEG MONITORING", color="white")
-plt.tight_layout()
+axes[-1].set_xlabel("Time (s)", color="white")
+
+fig.suptitle("LIVE EEG MONITORING", color="white", fontsize=11)
+
+plt.tight_layout(rect=[0, 0, 1, 0.96])
 
 def update(frame):
     start = frame * 8
@@ -52,7 +56,7 @@ ani = FuncAnimation(
 ani.save(
     "eeg_animation.gif",
     writer=PillowWriter(fps=20),
-    dpi=70
+    dpi=100
 )
 
 plt.show()
