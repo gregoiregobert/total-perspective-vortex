@@ -2,16 +2,19 @@
 # DATASET
 # =========================
 
-DATASET_NAME = "physionet"
+DATASET_NAME = "bci_competition"
 # "physionet"
 # "bci_competition"
+
+# PhysioNet experiment runs
+RUNS = (3, 4, 7, 8, 11, 12)
 
 
 # =========================
 # FEATURE EXTRACTION
 # =========================
 
-CSP_TYPE = "mne"
+CSP_TYPE = "custom"
 # "custom"
 # "mne"
 
@@ -32,29 +35,7 @@ CLASSIFIER_TYPE = "custom_logistic"
 
 
 # =========================
-# CSP PARAMETERS
-# =========================
-
-N_CSP_COMPONENTS = 4
-
-
-# =========================
-# WAVELET PARAMETERS
-# =========================
-
-WAVELET = "db4"
-WAVELET_LEVEL = 4
-
-
-# =========================
-# LOGISTIC PARAMETERS
-# =========================
-
-LOGISTIC_LEARNING_RATE = 0.1
-LOGISTIC_ITERATIONS = 2000
-
-# =========================
 # MAX SUBJECTS
 # =========================
 
-MAX_SUBJECTS = 15
+MAX_SUBJECTS = 10

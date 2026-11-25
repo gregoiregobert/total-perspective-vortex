@@ -9,7 +9,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DATA_DIR = PROJECT_ROOT / "data" / "physionet"
 
 
-def load_eeg(subject=1, runs=(4, 8, 12)):
+def load_eeg(subject=1, runs=(3, 4, 7, 8, 11, 12)):
 
     DATA_DIR.mkdir(parents=True, exist_ok=True)
 

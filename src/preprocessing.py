@@ -2,7 +2,10 @@
 import numpy as np
 import mne
 
-from src.config import DATASET_NAME
+from src.config import (
+    DATASET_NAME,
+    RUNS,
+)
 
 from src.datasets.physionet import (
     load_eeg as load_physionet,
@@ -57,7 +60,7 @@ def create_epochs(raw, tmin=1, tmax=4):
     return X, y
 
 
-def load_dataset(subject=1, runs=(4, 8, 12), session="T"):
+def load_dataset(subject=1, runs = RUNS, session="T"):
 
     if DATASET_NAME == "physionet":
 
@@ -100,7 +103,7 @@ def load_dataset(subject=1, runs=(4, 8, 12), session="T"):
 
 
 # Backward compatibility for scripts that still need Raw data.
-def load_eeg(subject=1, runs=(4, 8, 12)):
+def load_eeg(subject=1, runs=RUNS):
 
     if DATASET_NAME != "physionet":
         raise ValueError(
@@ -114,3 +117,57 @@ def load_eeg(subject=1, runs=(4, 8, 12)):
     )
 
     return mne.concatenate_raws(raw_list)
+
+
+def visualize_preprocessing(raw, low_freq=8, high_freq=30):
+    """
+    Affiche le signal EEG brut et le signal filtré.
+    """
+
+    # On conserve le signal brut en créant une copie.
+    raw_filtered = raw.copy()
+
+    # On applique le filtre uniquement sur la copie.
+    filter_eeg(
+        raw_filtered,
+        low_freq=low_freq,
+        high_freq=high_freq,
+    )
+
+    # Affichage du signal brut.
+    # Affichage du signal brut.
+    fig_raw = raw.plot(
+        duration=10,
+        n_channels=10,
+        title="EEG - Signal brut",
+        show=True,
+        block=True,
+    )
+
+    # Affichage du signal filtré.
+    fig_filtered = raw_filtered.plot(
+        duration=10,
+        n_channels=10,
+        title=f"EEG - Signal filtre ({low_freq}-{high_freq} Hz)",
+        show=True,
+        block=True,
+    )
+
+
+def main():
+
+    print("Loading EEG data...")
+
+    raw = load_eeg(
+        subject=1,
+        runs=(4,),
+    )
+
+    print("Visualizing raw and filtered signals...")
+
+    visualize_preprocessing(raw)
+
+
+if __name__ == "__main__":
+    main()
+
